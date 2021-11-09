@@ -14,6 +14,13 @@ const errorMixin = {
 				return 'error';
 			}
 		},
+		isNaN: function elementTotal( data ) {
+			const { value, element } = data;
+			if(isNaN(value)){
+				value.classList.add('redBox'); value.value = '';
+				return 'error';
+			}
+		},
 	}
 };
 
