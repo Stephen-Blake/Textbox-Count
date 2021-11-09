@@ -16,7 +16,7 @@ const errorMixin = {
 		},
 		isNaN: function elementTotal( data ) {
 			const { value, element } = data;
-			if(isNaN(value)){
+			if(isNaN(value.value)){
 				value.classList.add('redBox'); value.value = '';
 				return 'error';
 			}
