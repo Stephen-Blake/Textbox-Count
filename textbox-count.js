@@ -70,7 +70,6 @@ class textBoxCount {
 
 			if(isNaN(e.target.value)){
 				e.target.value = prevValue ? prevValue : 0;
-				return;
 			}
 
       this.count = 0;
@@ -91,6 +90,7 @@ class textBoxCount {
     });
 
   }
+
 
   #loopValue = ( i ) => {
 
