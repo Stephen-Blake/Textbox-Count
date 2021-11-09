@@ -62,6 +62,17 @@ class textBoxCount {
 
     this.elements[i].addEventListener('keyup', e => {
 
+			let prevValue = e.target.getAttribute('prev-value');
+
+			if(!isNaN(e.target.value)){
+				e.target.setAttribute( 'prev-value', e.target.value );
+			}
+
+			if(isNaN(e.target.value)){
+				e.target.value = prevValue ? prevValue : 0;
+				return;
+			}
+
       this.count = 0;
 
       this.#loop(
@@ -69,7 +80,7 @@ class textBoxCount {
       );
 
 			// Returns a promise
-			this.#errors.call(this, i)
+			this.#errors.call(this, i, prevValue)
 				.then(
 					() => this.countElement.innerText = this.count
 				)
@@ -93,7 +104,7 @@ class textBoxCount {
 
   }
 
-	#errors = async ( i ) => {
+	#errors = async ( i , prevValue ) => {
 
 		let errorPromise = new Promise((resolve, reject) => {
 
@@ -102,6 +113,7 @@ class textBoxCount {
 				let error = this.erroring.errors[errorIndex].call(this,
 					{
 						value: this.elements[i],
+						prevValue: prevValue ? prevValue : 0,
 						element: this.countElement
 					}
 				);
